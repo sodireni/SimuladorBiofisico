@@ -28,3 +28,4 @@ Script: `src/ingest/descargar_clima_diario_2025.py`
 - El clima viene de un reanálisis de ~0.1°, por lo que varias parcelas comparten la misma serie.
 - No se conoce la fecha de siembra; se define una regla (pendiente).
 - Control de calidad de la lluvia: la suma diaria de Open-Meteo (abril-octubre 2025) se comparó con el CHIRPS mensual del reto en el centroide de cada parcela. Total medio: 1,015 mm (Open-Meteo) vs 961 mm (CHIRPS), +6 %. Razón mensual entre 0.84 y 1.24, sin sesgo sistemático. La variación espacial entre parcelas es pequeña en ambas fuentes por su resolución (5-10 km).
+- Topografía: elevación y pendiente del CEM 4.0 de INEGI (120 m), media dentro del polígono de cada parcela (`src/ingest/extraer_topografia.py`). La pendiente se entrega en grados y se convierte a % con tan(grados)×100. Elevación media 2,667 m (2,497-2,905), pendiente media 2.9°.
