@@ -2,8 +2,7 @@
 Extrae elevación y pendiente por parcela (media dentro del polígono).
 
 Fuente: INEGI, Continuo de Elevaciones Mexicano 4.0 (CEM 4.0), entregado por el reto
-a 120 m. La pendiente viene en GRADOS; aquí se agrega también en % (= tan(grados)*100),
-que es la unidad que menciona el prompt maestro.
+a 120 m. La pendiente viene en GRADOS; aquí se agrega también en % (= tan(grados)*100).
 
 Uso (desde la carpeta principal del proyecto):
     python src/ingest/extraer_topografia.py
