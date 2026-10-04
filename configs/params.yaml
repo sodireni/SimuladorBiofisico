@@ -1,0 +1,33 @@
+# Parámetros del simulador biofísico. ÚNICA fuente de verdad: los módulos leen de aquí.
+# Los valores "del prompt" vienen del prompt maestro del equipo (FAO-56, CERES-Barley/APSIM).
+# Verifiquen cada cita en docs/FUENTES.md antes de entregar.
+
+ventana:
+  inicio: "2025-03-15"
+  fin: "2025-11-30"
+
+fenologia:
+  tbase_c: 0.0                  # prompt: 0-2 °C. Se usa 0.0 (hacer sensibilidad con 2.0)
+  gdd_antesis_objetivo: 800     # °C·d, del prompt
+  gdd_madurez_objetivo: 1450    # °C·d, del prompt
+  ventana_antesis_dias: 10      # ± días alrededor de la antesis, del prompt
+
+cultivo:
+  kc_ini: 0.30                  # FAO-56, del prompt
+  kc_mid: 1.15
+  kc_end: 0.25
+  p_agotamiento: 0.55           # fracción de agotamiento sin estrés, del prompt
+  rue_max_g_mj_par: 1.2         # g/MJ PAR, del prompt
+  hi_base: 0.42                 # índice de cosecha base, del prompt
+  par_fraccion: 0.48            # PAR = 0.48 * Rs, del prompt
+
+# SUPUESTOS PROPIOS del equipo (no hay fechas reales de siembra): documentarlos y
+# someterlos a análisis de sensibilidad.
+siembra:
+  pct_amplitud: 0.20            # umbral del inicio de crecimiento (fracción de la amplitud NDVI)
+  gdd_siembra_a_sos: 200        # °C·d entre siembra y detección del inicio de crecimiento (emergencia + dosel
+                                # visible en NDVI). Ajustar con el diagnóstico de estimar_siembra.py
+  ndvi_pico_minimo: 0.45        # por debajo, la parcela se marca como "pico bajo"
+  amplitud_minima: 0.15         # por debajo, se marca como "sin ciclo claro"
+  prominencia_pico_previo: 0.20 # un pico anterior al principal cuenta como "primer ciclo" si sobresale tanto (NDVI)
+  caida_valle_fraccion: 0.5     # ...y si el valle posterior cae al menos esta fracción hacia la base
