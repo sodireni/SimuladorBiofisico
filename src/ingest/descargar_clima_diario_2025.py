@@ -14,7 +14,8 @@ Uso (desde la carpeta principal del proyecto):
     python src/ingest/descargar_clima_diario_2025.py
 
 Si se interrumpe, vuelve a correrlo: omite las parcelas ya descargadas
-(guardadas en data/external/cache_clima/).
+(guardadas en data/external/cache_clima/), siempre que su caché cubra exactamente
+el periodo INICIO..FIN; si cambias las fechas, vuelve a descargar solo.
 
 Salida:
     data/external/clima_diario_parcelas_2025.csv   (una fila por parcela y día)
@@ -28,7 +29,7 @@ import requests
 COORDS_CSV = "data/processed/coordenadas_parcelas.csv"  # ID_POLIGON, latitud, longitud
 OUT_DIR = "data/external"
 CACHE_DIR = f"{OUT_DIR}/cache_clima"
-INICIO, FIN = "2025-03-15", "2025-10-31"
+INICIO, FIN = "2025-03-15", "2025-11-30"
 URL = "https://archive-api.open-meteo.com/v1/archive"
 VARIABLES = [
     "temperature_2m_max",
@@ -39,7 +40,7 @@ VARIABLES = [
 ]
 
 
-def pedir(lat, lon, reintentos=6):
+def pedir(lat, lon, reintentos=8):
     params = {
         "latitude": round(lat, 4),
         "longitude": round(lon, 4),
@@ -49,17 +50,39 @@ def pedir(lat, lon, reintentos=6):
         "timezone": "America/Mexico_City",
     }
     for i in range(reintentos):
-        r = requests.get(URL, params=params, timeout=60)
+        try:
+            r = requests.get(URL, params=params, timeout=90)
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            espera = 10 * (i + 1)
+            print(f"  fallo de red ({type(e).__name__}), reintento {i + 1}/{reintentos} "
+                  f"en {espera}s...")
+            time.sleep(espera)
+            continue
         if r.status_code == 200:
             js = r.json()
             return pd.DataFrame(js["daily"]), js.get("elevation")
-        if r.status_code == 429:
+        if r.status_code == 429 or r.status_code >= 500:
             espera = 30 * (i + 1)
-            print(f"  límite de uso, esperando {espera}s...")
+            print(f"  servidor ocupado o límite de uso (código {r.status_code}), "
+                  f"esperando {espera}s...")
             time.sleep(espera)
             continue
         r.raise_for_status()
-    raise RuntimeError(f"No se pudo descargar {lat},{lon}")
+    raise RuntimeError(
+        f"No se pudo descargar {lat},{lon} tras {reintentos} intentos. "
+        "Revisa tu conexión y vuelve a correr el script: retoma donde se quedó."
+    )
+
+
+def cache_vigente(ruta):
+    """True si el archivo en caché existe y cubre exactamente INICIO..FIN."""
+    if not os.path.exists(ruta):
+        return False
+    try:
+        f = pd.read_csv(ruta, usecols=["fecha"])["fecha"]
+        return len(f) > 0 and f.iloc[0] == INICIO and f.iloc[-1] == FIN
+    except Exception:
+        return False
 
 
 def main():
@@ -70,7 +93,7 @@ def main():
 
     for k, p in enumerate(par.itertuples(index=False), 1):
         ruta = f"{CACHE_DIR}/{p.ID_POLIGON}.csv"
-        if os.path.exists(ruta):
+        if cache_vigente(ruta):
             continue
         if k % 10 == 0 or k == total:
             print(f"[{k}/{total}] {p.ID_POLIGON}")
