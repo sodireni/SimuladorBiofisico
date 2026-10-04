@@ -32,7 +32,7 @@ COORDS = "data/processed/coordenadas_parcelas.csv"
 SALIDA = "data/processed/series_satelite_diarias_2025.csv"
 FIGURA = "docs/fig_satelite_qc.png"
 
-INI, FIN = pd.Timestamp("2025-03-15"), pd.Timestamp("2025-10-31")
+INI, FIN = pd.Timestamp("2025-03-15"), pd.Timestamp("2025-11-30")
 MARGEN = pd.Timedelta(days=30)     # evita huecos en los bordes al interpolar
 NUB_MAX = 20.0                     # % de nubosidad máxima aceptada (ajustable)
 MIN_OBS = 5                        # mínimo de observaciones válidas por parcela
