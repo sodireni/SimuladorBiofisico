@@ -25,6 +25,8 @@ cultivo:
 # someterlos a análisis de sensibilidad.
 siembra:
   pct_amplitud: 0.20            # umbral del inicio de crecimiento (fracción de la amplitud NDVI)
+  escenario_doble_ciclo: "A"    # "A" = siembra del primer ciclo, "B" = siembra del ciclo principal (31 parcelas).
+                                # PROVISIONAL: pendiente de decisión del equipo o aclaración de FIRA.
   gdd_siembra_a_sos: 200        # °C·d entre siembra y detección del inicio de crecimiento (emergencia + dosel
                                 # visible en NDVI). Ajustar con el diagnóstico de estimar_siembra.py
   ndvi_pico_minimo: 0.45        # por debajo, la parcela se marca como "pico bajo"
