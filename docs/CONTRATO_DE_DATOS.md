@@ -1,6 +1,6 @@
 # Contrato de datos del simulador biofísico
 
-Todo lo que se lee o se produce, con nombres y unidades acordados. **Si cambian un nombre, avisen al equipo y actualicen este archivo.**
+Todo lo que se lee o se produce, con nombres y unidades acordados. **Avisar si se cambia un nombre.**
 
 Reglas generales
 - El identificador de parcela es `ID_POLIGON` en todos los archivos intermedios. Solo el entregable final lo renombra a `ID_parcela`.

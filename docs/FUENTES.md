@@ -1,12 +1,12 @@
 # Fuentes de datos y referencias
 
 ## Datos del Comité Organizador (Reto AgroCebada FIRA 2026)
-| Dato | Fuente | Uso en el simulador |
-|---|---|---|
-| Parcelas (shapefile) | Comité Organizador | Centroides (lat/lon) |
-| Elevación y pendiente | INEGI, Continuo de Elevaciones Mexicano 4.0 | Variables topográficas |
-| Precipitación mensual | CHIRPS (Funk et al., 2015) | Control de calidad de la lluvia diaria |
-| Tmin y Tmax mensuales | CHIRTS-ERA5 (Climate Hazards Center, 2025) | Control de calidad de temperatura |
+|         Dato          |       Fuente                                      |  Uso en el simulador |
+|-----------------------|---------------------------------------------------|----------------------|
+| Parcelas (shapefile)  | Comité Organizador                                | Centroides (lat/lon) |
+| Elevación y pendiente | INEGI, Continuo de Elevaciones Mexicano 4.0       | Variables topográficas |
+| Precipitación mensual | CHIRPS (Funk et al., 2015)                        | Control de calidad de la lluvia diaria |
+| Tmin y Tmax mensuales | CHIRTS-ERA5 (Climate Hazards Center, 2025)        | Control de calidad de temperatura |
 | Índices satelitales | Sentinel-2, Landsat y Planet (dataset Básico y PRO) | fPAR y series de vegetación |
 
 ## Datos externos
