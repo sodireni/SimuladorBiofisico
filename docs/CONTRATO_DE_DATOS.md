@@ -1,6 +1,6 @@
 # Contrato de datos del simulador biofísico
 
-Todo lo que se lee o se produce, con nombres y unidades acordados. **Avisar si se cambia un nombre.**
+Todo lo que se lee o se produce, con nombres y unidades acordados. **Si cambian un nombre, avisen al equipo y actualicen este archivo.**
 
 Reglas generales
 - El identificador de parcela es `ID_POLIGON` en todos los archivos intermedios. Solo el entregable final lo renombra a `ID_parcela`.
@@ -61,9 +61,11 @@ Cada módulo es una función pura: `def modulo_X(df_in: pd.DataFrame, params: di
 | Módulo | Agrega | Notas |
 |---|---|---|
 | M1 clima | `tmean, ra, par, eto` | `par = 0.48 * rs`; `ra` por la ecuación 21 de FAO-56; ojo con las unidades de Hargreaves (Ra en MJ/m2/día x 0.408) |
-| M2 fenología | `gdd_acum, estadio, kc` | GDD desde `fecha_siembra` con `tbase_c` |
+| M2 fenología | `gdd_acum, estadio, kc, fecha_antesis, fecha_madurez` | `estadio` es uno de `pre_siembra, vegetativo, antesis, llenado, madurez`; la ventana de antesis tiene prioridad; las dos fechas son constantes por parcela |
 | M3 balance hídrico | `sw, ks, eta` | `ks` se calcula con `sw` del día anterior (evita la circularidad) |
-| M4 LUE | `bio, hi` | usa `fapar_final` |
+| M4 LUE | `dbio, bio` | `dbio` en kg/ha/día y `bio` acumulada desde la siembra hasta la madurez; usa `fapar_final`. `hi_penalizado()` es una función aparte |
+
+Código: paquete `src/simulador/` (carga en `io.py`, módulos `m1_clima.py` ... `m4_lue.py`, cálculo de las 12 variables en `variables.py`, encadenado en `pipeline.py`). Guía de cada módulo: `docs/GUIA_DE_MODULOS.md`.
 
 ## 5. Entregable final: `biofisicas_197_parcelas.csv`
 
@@ -72,5 +74,5 @@ Una fila por parcela con `ID_parcela` y las 12 variables del prompt maestro. `De
 ## 6. Decisiones abiertas (no bloquean el trabajo)
 
 1. **Escenario de siembra** A o B para las 31 parcelas de doble ciclo (hoy A). Pendiente de decisión del equipo o respuesta de FIRA.
-2. **Fenología:** los umbrales del prompt (antesis 800, madurez 1450 °C·d) no cuadran con lo que muestra el satélite (mediana de 1,224 °C·d entre la siembra estimada y el pico de NDVI). Falta decidir Tbase y cómo definir las etapas.
+2. **Fenología:** los umbrales del prompt (antesis 800, madurez 1450 °C·d) son compatibles con variedades mexicanas de Valles Altos (INIFAP), así que `umbral_gdd` queda como modo principal y `satelite` como sensibilidad. Falta decidir cómo evitar que `GDD_antesis` y `GDD_llenado` salgan casi constantes, y Tbase (0 o 2 °C).
 3. **ETo:** el rango térmico diario de Open-Meteo es ~3 °C más angosto que el de las estaciones; Hargreaves podría salir ~10 % bajo. Compararlo con `eto_om` y decidir si se corrige.
