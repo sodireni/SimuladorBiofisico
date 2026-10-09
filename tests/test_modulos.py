@@ -19,7 +19,7 @@ pendiente = pytest.mark.xfail(raises=NotImplementedError, reason="módulo sin im
 PARAMS = cargar_params(str(Path(__file__).resolve().parents[1]))   # configs/params.yaml
 
 
-@pendiente
+
 def test_m1_agrega_columnas_y_rangos(entrada):
     d = m1_clima(entrada, PARAMS)
     for c in ["tmean", "ra", "par", "eto"]:
