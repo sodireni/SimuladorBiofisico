@@ -3,8 +3,12 @@ Plantillas de prueba por módulo. Hoy salen como 'xfail' (esperadas a fallar) po
 no están implementados. Cuando implementen el suyo: QUITEN el decorador @pendiente de sus pruebas,
 confirmen que pasan y AGREGUEN sus propias pruebas (casos con respuesta conocida).
 """
+from pathlib import Path
+
 import numpy as np
 import pytest
+
+from simulador.io import cargar_params
 
 from simulador.m1_clima import m1_clima
 from simulador.m2_fenologia import ESTADIOS, m2_fenologia
@@ -12,7 +16,7 @@ from simulador.m3_balance_hidrico import m3_balance_hidrico
 from simulador.m4_lue import m4_lue
 
 pendiente = pytest.mark.xfail(raises=NotImplementedError, reason="módulo sin implementar")
-PARAMS = {}   # cámbienlo por cargar_params(".") cuando prueben con configs/params.yaml
+PARAMS = cargar_params(str(Path(__file__).resolve().parents[1]))   # configs/params.yaml
 
 
 @pendiente
@@ -35,7 +39,6 @@ def test_m2_agrega_columnas_y_estadios(entrada_m1_m2):
     assert (d.groupby("ID_POLIGON")["gdd_acum"].diff().dropna() >= 0).all()      # monótona
 
 
-@pendiente
 def test_m3_limites_y_balance(entrada_m3):
     entrada = entrada_m3.drop(columns=["sw", "ks", "eta"])
     d = m3_balance_hidrico(entrada, PARAMS)
