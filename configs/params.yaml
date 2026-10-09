@@ -1,35 +1,51 @@
 # Parámetros del simulador biofísico. ÚNICA fuente de verdad: los módulos leen de aquí.
-# Los valores "del prompt" vienen del prompt maestro del equipo (FAO-56, CERES-Barley/APSIM).
-# Verifiquen cada cita en docs/FUENTES.md antes de entregar.
+# Estado de verificación y fuentes de cada valor: docs/JUSTIFICACION_PARAMETROS.md
+# (V = verificado contra la fuente, P = plausible pero con reserva, S = supuesto propio del equipo)
 
 ventana:
   inicio: "2025-03-15"
   fin: "2025-11-30"
 
 fenologia:
-  tbase_c: 0.0                  # prompt: 0-2 °C. Se usa 0.0 (hacer sensibilidad con 2.0)
-  gdd_antesis_objetivo: 800     # °C·d, del prompt
-  gdd_madurez_objetivo: 1450    # °C·d, del prompt
-  ventana_antesis_dias: 10      # ± días alrededor de la antesis, del prompt
+  tbase_c: 0.0                  # [V] base 0 °C usada en la literatura de cebada; el prompt dice 0-2 (hacer sensibilidad con 2.0)
+  gdd_antesis_objetivo: 800     # [P] compatible con variedades INIFAP (floración a 48-72 días); depende del cultivar
+  gdd_madurez_objetivo: 1450    # [P] ídem (madurez fisiológica a 90-132 días)
+  ventana_antesis_dias: 10      # [S] ± días alrededor de la antesis, del prompt
+  modo: "umbral_gdd"            # "umbral_gdd" (principal, revisado el 5-oct) o "satelite" (sensibilidad). DECISIÓN ABIERTA.
+  madurez_fapar_frac_pico: 0.5  # [S] modo satélite: madurez = 1.er día tras el pico con fapar <= esta fracción del pico
+  kc_frac_inicial: 0.30         # [S] etapa inicial = esta fracción del tiempo siembra -> antesis
+  kc_frac_mid: 0.50             # [S] etapa mid = esta fracción del tiempo antesis -> madurez
 
 cultivo:
-  kc_ini: 0.30                  # FAO-56, del prompt
-  kc_mid: 1.15
-  kc_end: 0.25
-  p_agotamiento: 0.55           # fracción de agotamiento sin estrés, del prompt
-  rue_max_g_mj_par: 1.2         # g/MJ PAR, del prompt
-  hi_base: 0.42                 # índice de cosecha base, del prompt
-  par_fraccion: 0.48            # PAR = 0.48 * Rs, del prompt
+  kc_ini: 0.30                  # [V] FAO-56 Tabla 12, cebada (confirmar en el documento original)
+  kc_mid: 1.15                  # [V] ídem
+  kc_end: 0.25                  # [V] ídem
+  p_agotamiento: 0.55           # [V] FAO-56 Tabla 22, cebada, para ETc ~5 mm/día
+  rue_max_g_mj_par: 1.2         # [P] ver nota: la literatura da 2.6-2.9 g/MJ de PAR absorbida (Goyne et al. 1993); 1.2 ~ 0.48 x 2.5
+                                #     por MJ de radiación GLOBAL. Es una constante de escala: no cambia el orden entre parcelas.
+  hi_base: 0.42                 # [P] razonable; cebada medida 0.46-0.52 en Idaho. Alternativa con fuente: Kemanian et al. (2007)
+  par_fraccion: 0.48            # [V] rango publicado 0.42-0.55; muchos modelos usan 0.50
+
+suelo:
+  sw_inicial_frac_awc: 0.5      # [S] agua inicial del depósito (15-mar) = PWP + esta fracción de AWC. Hacer sensibilidad.
+  # El balance se corre desde el 15-mar (calentamiento). Profundidad de raíz = 0-60 cm (las 4 capas descargadas):
+  # FAO-56 da 1.0-1.5 m para cebada, así que el agua disponible está SUBESTIMADA (limitación a documentar).
+
+lue:
+  hi_beta: 0.5                  # [S] opción A: HI = HI_base * (1 - hi_beta * (1 - KS_llenado)). Sin fuente: preferir la opción B.
+  hi_kemanian:                  # [P] opción B (recomendada): HI = hi0 + s * fG, fG = biomasa posterior a la antesis / biomasa total
+    hi0: 0.3                    #     Kemanian et al. (2007): para cebada ambos parámetros rondan 0.3 (CONFIRMAR en el artículo)
+    s: 0.3
 
 # SUPUESTOS PROPIOS del equipo (no hay fechas reales de siembra): documentarlos y
 # someterlos a análisis de sensibilidad.
 siembra:
-  pct_amplitud: 0.20            # umbral del inicio de crecimiento (fracción de la amplitud NDVI)
-  escenario_doble_ciclo: "A"    # "A" = siembra del primer ciclo, "B" = siembra del ciclo principal (31 parcelas).
-                                # PROVISIONAL: pendiente de decisión del equipo o aclaración de FIRA.
-  gdd_siembra_a_sos: 200        # °C·d entre siembra y detección del inicio de crecimiento (emergencia + dosel
-                                # visible en NDVI). Ajustar con el diagnóstico de estimar_siembra.py
-  ndvi_pico_minimo: 0.45        # por debajo, la parcela se marca como "pico bajo"
-  amplitud_minima: 0.15         # por debajo, se marca como "sin ciclo claro"
-  prominencia_pico_previo: 0.20 # un pico anterior al principal cuenta como "primer ciclo" si sobresale tanto (NDVI)
-  caida_valle_fraccion: 0.5     # ...y si el valle posterior cae al menos esta fracción hacia la base
+  pct_amplitud: 0.20            # [V] umbral relativo del inicio de temporada (Jönsson y Eklundh 2004; en otros trabajos 20-30 %)
+  escenario_doble_ciclo: "A"    # "A" = siembra del primer ciclo, "B" = del ciclo principal (31 parcelas).
+                                # PROVISIONAL: la evidencia de época de siembra no separa A de B.
+  gdd_siembra_a_sos: 200        # [S] °C·d siembra -> detección del inicio de crecimiento. La emergencia sola toma ~156 °C·d
+                                #     (Alzueta et al. 2014), así que 200 es probablemente bajo: probar 150-350.
+  ndvi_pico_minimo: 0.45        # [S] por debajo, la parcela se marca como "pico bajo"
+  amplitud_minima: 0.15         # [S] por debajo, se marca como "sin ciclo claro"
+  prominencia_pico_previo: 0.20 # [S] un pico anterior al principal cuenta como "primer ciclo" si sobresale tanto (NDVI)
+  caida_valle_fraccion: 0.5     # [S] ...y si el valle posterior cae al menos esta fracción hacia la base
