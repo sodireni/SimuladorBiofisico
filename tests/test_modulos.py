@@ -29,7 +29,7 @@ def test_m1_agrega_columnas_y_rangos(entrada):
     assert np.allclose(d["tmean"], (entrada["tmax"] + entrada["tmin"]) / 2)
 
 
-@pendiente
+
 def test_m2_agrega_columnas_y_estadios(entrada_m1_m2):
     entrada = entrada_m1_m2.drop(columns=["gdd_acum", "estadio", "kc", "fecha_antesis", "fecha_madurez"])
     d = m2_fenologia(entrada, PARAMS)
