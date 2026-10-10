@@ -3,3 +3,4 @@
 __pycache__/
 .ipynb_checkpoints/
 data/external/cache_clima/
+data/processed/simulacion_*.csv
