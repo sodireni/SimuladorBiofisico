@@ -121,6 +121,13 @@ Separadas por estado de verificación. **Solo las del primer grupo están listas
 - Una fuente para el factor 1.724 de materia orgánica (método de análisis de suelos).
 - Una fuente INIFAP de **época de siembra de cebada de temporal en Valles Altos** (hoy solo hay prensa y un documento de Zacatecas).
 
-### Declaración de uso de IA (exigida por los lineamientos)
+## Cambios del 10-oct-2026
 
-Este análisis se hizo con ayuda de Claude (Anthropic). Registren en `docs/PROMPTS.md` cada consulta, su propósito y la herramienta, además de las fuentes anteriores.
+| Parámetro | Valor anterior | Valor actual | Estado | Razón |
+|---|---|---|---|---|
+| `cultivo.rue_max_g_mj_par` | 1.2 | 2.5 | P | Se aplica a la PAR absorbida. La literatura de cebada reporta 2.6-2.9 g/MJ (Goyne et al., 1993). El 1.2 anterior parecía una RUE sobre radiación global. Es una constante de escala: no cambia el orden entre parcelas. |
+| `cultivo.hi_base` | 0.42 | 0.45 | S | Valor usado en el módulo 4 del equipo. Sin fuente específica; pendiente de justificar. |
+| `lue.hi_opcion` | (no existía) | "C" | S | Fórmula del equipo que penaliza el estrés de antesis y de llenado. La opción B (Kemanian et al., 2007) queda como sensibilidad. |
+| `lue.hi_sens_antesis`, `lue.hi_sens_llenado` | (no existían) | 0.5 y 0.3 | S | Sin fuente. |
+| `clima.factor_eto` | (no existía) | 1.0 | S | Hargreaves sin corrección. La sensibilidad con 1.09 viene del cociente global 0.917 frente a la ETo de Open-Meteo. |
+| `fenologia.gdd_variables_ref` | (no existía) | "pico_ndvi" | S | Evita que GDD_antesis y GDD_llenado queden casi constantes en el modo umbral. |
