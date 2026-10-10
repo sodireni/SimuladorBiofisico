@@ -70,9 +70,16 @@ Código: paquete `src/simulador/` (carga en `io.py`, módulos `m1_clima.py` ... 
 ## 5. Entregable final: `biofisicas_197_parcelas.csv`
 
 Una fila por parcela con `ID_parcela` y las 12 variables del prompt maestro. `Deficit_Hidrico_Total = ETo_acum - ETa_acum` (no confundir con el balance lluvia - ETo del notebook antiguo).
+Aparte se guarda `biofisicas_extras_197_parcelas.csv` con `ID_parcela`, `Deficit_ETc` (suma de ETo x Kc menos suma de ETa) y `ciclo_incompleto` (la madurez no se alcanzó antes del 30-nov), para que el equipo de ML decida si los usa.
 
 ## 6. Decisiones abiertas (no bloquean el trabajo)
 
-1. **Escenario de siembra** A o B para las 31 parcelas de doble ciclo (hoy A). Pendiente de decisión del equipo o respuesta de FIRA.
-2. **Fenología:** los umbrales del prompt (antesis 800, madurez 1450 °C·d) son compatibles con variedades mexicanas de Valles Altos (INIFAP), así que `umbral_gdd` queda como modo principal y `satelite` como sensibilidad. Falta decidir cómo evitar que `GDD_antesis` y `GDD_llenado` salgan casi constantes, y Tbase (0 o 2 °C).
-3. **ETo:** el rango térmico diario de Open-Meteo es ~3 °C más angosto que el de las estaciones; Hargreaves podría salir ~10 % bajo. Compararlo con `eto_om` y decidir si se corrige.
+Tomadas el 10-oct-2026:
+1. **ETo:** Hargreaves sin corrección (`clima.factor_eto: 1.0`) como caso base y factor 1.09 como sensibilidad.
+2. **Fenología:** `umbral_gdd` como modo principal y `satelite` como sensibilidad. Tbase 0 °C, con sensibilidad a 2 °C.
+3. **GDD_antesis y GDD_llenado:** se calculan con el pico de NDVI (`fenologia.gdd_variables_ref: "pico_ndvi"`) para que varíen entre parcelas. `GDD_llenado` vale 0 si el pico cae después de la madurez.
+4. **Escenario de siembra:** se mantiene A para las 31 parcelas de doble ciclo. FIRA respondió el 9-oct que no hay fechas reales de siembra (referencia: primeros días de mayo) y no respondió sobre el doble propósito.
+
+Abiertas:
+1. **Índice de cosecha:** opción C (la del M4 del equipo, sin fuente) contra opción B (Kemanian et al., 2007, recomendada).
+2. **Siembra:** la estimación con NDVI es posterior a la referencia de FIRA; se evalúa con una sensibilidad (siembra fija al 5-may).

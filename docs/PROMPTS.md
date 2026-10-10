@@ -106,3 +106,8 @@
     Visualizaciones a Producir:
         1. SHAP Summary Beeswarm Plot: Demostrar el ranking global de importancia de características, probando que variables biofísicas como KS_prom_antesis y Biomasa_Total_Sim dominan la predicción por encima de índices vegetativos aislados.
         2. SHAP Waterfall / Force Plots por Parcela: Explicar diagnósticos individuales en parcelas de evaluación (por ejemplo: "La parcela X obtuvo una reducción de -0.7 ton/ha debido a un bajo KS_prom_llenado provocado por sequía terminal en septiembre").
+
+
+## 10-oct-2026. Claude (Anthropic)
+
+Uso: apoyo para integrar el trabajo del equipo en la estructura `src/simulador/`. Se implementaron y probaron con datos sintéticos los módulos M1 (clima), M2 (fenología) y M3 (balance hídrico), `variables.py` y los scripts de validación (`scripts/validar_datos_reales.py`, `scripts/exportar_m1_m3.py`, `scripts/comparar_con_m4_companera.py`). 
