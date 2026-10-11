@@ -45,7 +45,6 @@ def test_m3_limites_y_balance(entrada_m3):
     assert (d["eta"] <= d["eto"] * d["kc"] + 1e-9).all()
 
 
-@pendiente
 def test_m4_biomasa_no_decrece(entrada_m3):
     d = m4_lue(entrada_m3, PARAMS)
     assert (d["dbio"] >= 0).all()

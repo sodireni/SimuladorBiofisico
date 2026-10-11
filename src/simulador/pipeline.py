@@ -9,7 +9,7 @@ from simulador.m1_clima import m1_clima
 from simulador.m2_fenologia import m2_fenologia
 from simulador.m3_balance_hidrico import m3_balance_hidrico
 from simulador.m4_lue import m4_lue
-from simulador.variables import calcular_variables, exportar_entregable
+from simulador.variables import calcular_variables, exportar_entregable, exportar_extras
 
 
 def correr(raiz="."):
@@ -25,4 +25,12 @@ if __name__ == "__main__":
     Path("data/processed").mkdir(parents=True, exist_ok=True)
     df.to_csv("data/processed/simulacion_diaria.csv", index=False)
     exportar_entregable(variables, "data/processed/biofisicas_197_parcelas.csv")
+    exportar_extras(variables, "data/processed/biofisicas_extras_197_parcelas.csv")
+    n_llenado0 = int((variables["GDD_llenado"] == 0).sum())
     print("Listo:", variables.shape)
+    print(f"Parcelas con ciclo incompleto (madurez después del fin de la ventana): {int(variables['ciclo_incompleto'].sum())}")
+    print(f"Parcelas con GDD_llenado = 0: {n_llenado0} de {len(variables)}"
+          + ("  <- REVISAR: la definición pierde información" if n_llenado0 > 0.15 * len(variables) else ""))
+    print(f"Parcelas donde el fPAR no cae a la mitad del pico antes del 30-nov: {int(variables['caida_fpar_no_alcanzada'].sum())}")
+    print(f"GDD_antesis  (min / mediana / max): {variables['GDD_antesis'].min():.0f} / {variables['GDD_antesis'].median():.0f} / {variables['GDD_antesis'].max():.0f}")
+    print(f"GDD_llenado  (min / mediana / max): {variables['GDD_llenado'].min():.0f} / {variables['GDD_llenado'].median():.0f} / {variables['GDD_llenado'].max():.0f}")
