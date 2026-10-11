@@ -1,0 +1,1 @@
+Versión anterior de los módulos del simulador (previa a la estructura `src/simulador/`). No se usa; se conserva solo como referencia.

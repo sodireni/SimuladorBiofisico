@@ -10,7 +10,7 @@ from pathlib import Path
 import tkinter as tk
 
 
-RAIZ_PROYECTO = Path(__file__).resolve().parents[2]
+RAIZ_PROYECTO = Path(__file__).resolve().parents[1]
 RUTA_CSV = RAIZ_PROYECTO / "data" / "processed" / "Datos para fpar.csv"
 
 
