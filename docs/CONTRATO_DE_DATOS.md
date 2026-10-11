@@ -77,7 +77,7 @@ Aparte se guarda `biofisicas_extras_197_parcelas.csv` con `ID_parcela`, `Deficit
 Tomadas el 10-oct-2026:
 1. **ETo:** Hargreaves sin corrección (`clima.factor_eto: 1.0`) como caso base y factor 1.09 como sensibilidad.
 2. **Fenología:** `umbral_gdd` como modo principal y `satelite` como sensibilidad. Tbase 0 °C, con sensibilidad a 2 °C.
-3. **GDD_antesis y GDD_llenado:** se calculan con el pico de NDVI (`fenologia.gdd_variables_ref: "pico_ndvi"`) para que varíen entre parcelas. `GDD_llenado` vale 0 si el pico cae después de la madurez.
+3. **GDD_antesis y GDD_llenado:** se calculan con el pico de NDVI (`fenologia.gdd_variables_ref: "pico_ndvi"`) para que varíen entre parcelas: `GDD_antesis` va de la siembra al pico y `GDD_llenado` del pico al día en que el fPAR cae a la mitad del pico. La versión que llegaba hasta la madurez por umbral se descartó porque dio 0 en 61 de 197 parcelas.
 4. **Escenario de siembra:** se mantiene A para las 31 parcelas de doble ciclo. FIRA respondió el 9-oct que no hay fechas reales de siembra (referencia: primeros días de mayo) y no respondió sobre el doble propósito.
 
 Abiertas:

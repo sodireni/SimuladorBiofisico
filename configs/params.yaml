@@ -11,19 +11,28 @@ fenologia:
   gdd_antesis_objetivo: 800     # [P] compatible con variedades INIFAP (floración a 48-72 días); depende del cultivar
   gdd_madurez_objetivo: 1450    # [P] ídem (madurez fisiológica a 90-132 días)
   ventana_antesis_dias: 10      # [S] ± días alrededor de la antesis, del prompt
+  gdd_variables_ref: "pico_ndvi" # [S] decisión del equipo (10-oct). "pico_ndvi": GDD_antesis = grados-día de la siembra al pico de NDVI;
+                                #     GDD_llenado = grados-día del pico al día en que el fPAR cae a madurez_fapar_frac_pico del pico.
+                                #     "pico_ndvi_hasta_madurez_modelo": llenado hasta la madurez del modo activo (dio 0 en 61 de 197 parcelas).
+                                #     "antesis": definición de la guía (casi constante en modo umbral).
   modo: "umbral_gdd"            # "umbral_gdd" (principal, revisado el 5-oct) o "satelite" (sensibilidad). DECISIÓN ABIERTA.
   madurez_fapar_frac_pico: 0.5  # [S] modo satélite: madurez = 1.er día tras el pico con fapar <= esta fracción del pico
   kc_frac_inicial: 0.30         # [S] etapa inicial = esta fracción del tiempo siembra -> antesis
   kc_frac_mid: 0.50             # [S] etapa mid = esta fracción del tiempo antesis -> madurez
+
+clima:
+  factor_eto: 1.0               # [S] decisión del equipo (10-oct): 1.0 = Hargreaves sin corrección (base); 1.09 = sensibilidad
+                                #     (1.09 ~ 1 / 0.917, cociente global Hargreaves / ETo de Open-Meteo en las 197 parcelas)
 
 cultivo:
   kc_ini: 0.30                  # [V] FAO-56 Tabla 12, cebada (confirmar en el documento original)
   kc_mid: 1.15                  # [V] ídem
   kc_end: 0.25                  # [V] ídem
   p_agotamiento: 0.55           # [V] FAO-56 Tabla 22, cebada, para ETc ~5 mm/día
-  rue_max_g_mj_par: 1.2         # [P] ver nota: la literatura da 2.6-2.9 g/MJ de PAR absorbida (Goyne et al. 1993); 1.2 ~ 0.48 x 2.5
-                                #     por MJ de radiación GLOBAL. Es una constante de escala: no cambia el orden entre parcelas.
-  hi_base: 0.42                 # [P] razonable; cebada medida 0.46-0.52 en Idaho. Alternativa con fuente: Kemanian et al. (2007)
+  rue_max_g_mj_par: 2.5         # [P] g/MJ de PAR ABSORBIDA (valor del M4 de la compañera). Literatura de cebada: 2.6-2.9 (Goyne et al. 1993).
+                                #     El 1.2 anterior parecía una RUE sobre radiación GLOBAL (~0.48 x 2.5), no sobre PAR (Bonhomme 2000).
+                                #     Es una constante de escala: no cambia el orden entre parcelas. Hacer sensibilidad con 2.6 y 1.2.
+  hi_base: 0.45                 # [S] valor usado en el M4 de la compañera (antes 0.42, del prompt); FALTA su fuente. Razonable; cebada medida 0.46-0.52 en Idaho. Alternativa con fuente: Kemanian et al. (2007)
   par_fraccion: 0.48            # [V] rango publicado 0.42-0.55; muchos modelos usan 0.50
 
 suelo:
@@ -32,6 +41,9 @@ suelo:
   # FAO-56 da 1.0-1.5 m para cebada, así que el agua disponible está SUBESTIMADA (limitación a documentar).
 
 lue:
+  hi_opcion: "C"                # "A" (lineal, hi_beta), "B" (Kemanian, recomendada por la guía) o "C" (M4 de la compañera: penaliza antesis y llenado)
+  hi_sens_antesis: 0.5          # [S] opción C: HI = hi_base * (1 - sens_antesis*(1-KS_antesis) - sens_llenado*(1-KS_llenado)). SIN FUENTE
+  hi_sens_llenado: 0.3          # [S] opción C. SIN FUENTE
   hi_beta: 0.5                  # [S] opción A: HI = HI_base * (1 - hi_beta * (1 - KS_llenado)). Sin fuente: preferir la opción B.
   hi_kemanian:                  # [P] opción B (recomendada): HI = hi0 + s * fG, fG = biomasa posterior a la antesis / biomasa total
     hi0: 0.3                    #     Kemanian et al. (2007): para cebada ambos parámetros rondan 0.3 (CONFIRMAR en el artículo)

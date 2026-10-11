@@ -130,4 +130,4 @@ Separadas por estado de verificación. **Solo las del primer grupo están listas
 | `lue.hi_opcion` | (no existía) | "C" | S | Fórmula del equipo que penaliza el estrés de antesis y de llenado. La opción B (Kemanian et al., 2007) queda como sensibilidad. |
 | `lue.hi_sens_antesis`, `lue.hi_sens_llenado` | (no existían) | 0.5 y 0.3 | S | Sin fuente. |
 | `clima.factor_eto` | (no existía) | 1.0 | S | Hargreaves sin corrección. La sensibilidad con 1.09 viene del cociente global 0.917 frente a la ETo de Open-Meteo. |
-| `fenologia.gdd_variables_ref` | (no existía) | "pico_ndvi" | S | Evita que GDD_antesis y GDD_llenado queden casi constantes en el modo umbral. |
+| `fenologia.gdd_variables_ref` | (no existía) | "pico_ndvi" | S | Evita que GDD_antesis y GDD_llenado queden casi constantes en el modo umbral. GDD_llenado llega hasta la caída del fPAR a la mitad del pico; llegar hasta la madurez por umbral dejaba GDD_llenado en 0 en 61 de 197 parcelas. |
