@@ -1,11 +1,9 @@
 # Contrato de datos del simulador biofísico
 
-Todo lo que se lee o se produce, con nombres y unidades acordados. **Si cambian un nombre, avisen al equipo y actualicen este archivo.**
-
 Reglas generales
 - El identificador de parcela es `ID_POLIGON` en todos los archivos intermedios. Solo el entregable final lo renombra a `ID_parcela`.
 - Ventana de simulación: **2025-03-15 a 2025-11-30** (261 días). Fechas en formato `YYYY-MM-DD`.
-- Los parámetros (Tbase, Kc, p, RUE, HI, umbrales) se leen de `configs/params.yaml`, nunca se escriben dentro del código.
+- Los parámetros (Tbase, Kc, p, RUE, HI, umbrales) se leen de `configs/params.yaml`.
 - **No se usa el rendimiento** en ningún cálculo del simulador. Evita fuga de datos.
 - Los archivos de `data/` ya incluyen lo necesario; los scripts que los generan están en `src/ingest/`.
 
@@ -56,11 +54,11 @@ Fuente: Open-Meteo (ERA5/ERA5-Land). **No usar los rasters CHIRTS como temperatu
 
 ## 4. Qué devuelve cada módulo
 
-Cada módulo es una función pura: `def modulo_X(df_in: pd.DataFrame, params: dict) -> pd.DataFrame`, con un DataFrame diario (una fila por parcela y día) al que **agrega** columnas.
+Cada módulo es una función pura: `def modulo_X(df_in: pd.DataFrame, params: dict) -> pd.DataFrame`, con un DataFrame diario (una fila por parcela y día) al que agrega columnas.
 
 | Módulo | Agrega | Notas |
 |---|---|---|
-| M1 clima | `tmean, ra, par, eto` | `par = 0.48 * rs`; `ra` por la ecuación 21 de FAO-56; ojo con las unidades de Hargreaves (Ra en MJ/m2/día x 0.408) |
+| M1 clima | `tmean, ra, par, eto` | `par = 0.48 * rs`; `ra` por la ecuación 21 de FAO-56; unidades de Hargreaves (Ra en MJ/m2/día x 0.408) |
 | M2 fenología | `gdd_acum, estadio, kc, fecha_antesis, fecha_madurez` | `estadio` es uno de `pre_siembra, vegetativo, antesis, llenado, madurez`; la ventana de antesis tiene prioridad; las dos fechas son constantes por parcela |
 | M3 balance hídrico | `sw, ks, eta` | `ks` se calcula con `sw` del día anterior (evita la circularidad) |
 | M4 LUE | `dbio, bio` | `dbio` en kg/ha/día y `bio` acumulada desde la siembra hasta la madurez; usa `fapar_final`. `hi_penalizado()` es una función aparte |
@@ -69,7 +67,7 @@ Código: paquete `src/simulador/` (carga en `io.py`, módulos `m1_clima.py` ... 
 
 ## 5. Entregable final: `biofisicas_197_parcelas.csv`
 
-Una fila por parcela con `ID_parcela` y las 12 variables del prompt maestro. `Deficit_Hidrico_Total = ETo_acum - ETa_acum` (no confundir con el balance lluvia - ETo del notebook antiguo).
+Una fila por parcela con `ID_parcela` y las 12 variables biofísicas. `Deficit_Hidrico_Total = ETo_acum - ETa_acum`.
 Aparte se guarda `biofisicas_extras_197_parcelas.csv` con `ID_parcela`, `Deficit_ETc` (suma de ETo x Kc menos suma de ETa) y `ciclo_incompleto` (la madurez no se alcanzó antes del 30-nov), para que el equipo de ML decida si los usa.
 
 ## 6. Decisiones abiertas (no bloquean el trabajo)
