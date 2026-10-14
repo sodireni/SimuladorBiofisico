@@ -1,4 +1,4 @@
-"""Las 12 variables biofísicas por parcela y el entregable final. Definiciones: docs/GUIA_DE_MODULOS.md (sección 9)."""
+"""Las 12 variables biofísicas por parcela y el entregable final."""
 import numpy as np
 import pandas as pd
 

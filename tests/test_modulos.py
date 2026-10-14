@@ -1,8 +1,4 @@
-"""
-Plantillas de prueba por módulo. Hoy salen como 'xfail' (esperadas a fallar) porque los módulos
-no están implementados. Cuando implementen el suyo: QUITEN el decorador @pendiente de sus pruebas,
-confirmen que pasan y AGREGUEN sus propias pruebas (casos con respuesta conocida).
-"""
+
 from pathlib import Path
 
 import numpy as np

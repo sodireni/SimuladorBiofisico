@@ -1,4 +1,4 @@
-"""Pruebas de la carga de datos y del entregable (sí deben pasar desde hoy)."""
+
 import pandas as pd
 import pytest
 

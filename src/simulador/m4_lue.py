@@ -1,4 +1,4 @@
-"""Módulo 4: biomasa por eficiencia de uso de la luz (Monteith). Ver docs/GUIA_DE_MODULOS.md (sección 8)."""
+"""Módulo 4: biomasa por eficiencia de uso de la luz (Monteith)."""
 import numpy as np
 import pandas as pd
 

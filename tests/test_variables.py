@@ -1,4 +1,4 @@
-"""Pruebas de las 12 variables (guía, sección 9) con un caso hecho a mano: tmean = 10 °C constante, Tbase 0."""
+"""Pruebas de las 12 variables con un caso hecho a mano: tmean = 10 °C constante, Tbase 0."""
 from pathlib import Path
 
 import numpy as np

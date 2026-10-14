@@ -1,6 +1,5 @@
 """
-Datos sintéticos que respetan docs/CONTRATO_DE_DATOS.md, para probar cada módulo SIN depender de
-que los demás estén terminados ni de los archivos reales.
+Datos sintéticos para probar cada módulo SIN depender de que los demás estén terminados ni de los archivos reales.
 
   entrada_sintetica()    -> lo que devuelve cargar_entrada() (clima + satélite + parcelas_base)
   con_m1_m2(df)          -> le agrega columnas plausibles de M1 y M2 (para trabajar en M3 y M4)

@@ -1,4 +1,4 @@
-"""Pruebas del módulo 2 (fenología) con respuestas conocidas hechas a mano (guía, sección 6)."""
+"""Pruebas del módulo 2 (fenología) con respuestas conocidas hechas a mano (guía)."""
 from pathlib import Path
 
 import numpy as np

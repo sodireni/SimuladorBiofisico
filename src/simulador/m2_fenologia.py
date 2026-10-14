@@ -1,4 +1,4 @@
-"""Módulo 2: fenología por tiempo térmico. Ver docs/GUIA_DE_MODULOS.md (sección 6)."""
+"""Módulo 2: fenología por tiempo térmico."""
 import numpy as np
 import pandas as pd
 
@@ -133,7 +133,7 @@ def m2_fenologia(df_in: pd.DataFrame, params: dict) -> pd.DataFrame:
 
 def ciclos_incompletos(df_m2: pd.DataFrame) -> pd.DataFrame:
     """Parcelas cuya antesis o madurez cae en el último día de la serie (la meta no se alcanzó dentro de
-    la ventana, o coincidió justo con el último día). La guía pide marcarlas y reportar cuántas son.
+    la ventana, o coincidió justo con el último día). 
     Devuelve ID_POLIGON, fecha_antesis, fecha_madurez, antesis_incompleta, madurez_incompleta."""
     ultimo = df_m2.groupby("ID_POLIGON")["fecha"].max().rename("ultimo_dia")
     por_parcela = (df_m2.drop_duplicates("ID_POLIGON")[["ID_POLIGON", "fecha_antesis", "fecha_madurez"]]

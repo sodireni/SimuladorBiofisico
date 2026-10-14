@@ -1,4 +1,4 @@
-"""Módulo 1: clima diario derivado. Ver docs/GUIA_DE_MODULOS.md (sección 5)."""
+"""Módulo 1: clima diario derivado."""
 import numpy as np
 import pandas as pd
 
@@ -26,10 +26,9 @@ def m1_clima(df_in: pd.DataFrame, params: dict) -> pd.DataFrame:
     - par   = params['cultivo']['par_fraccion'] * rs                     [MJ/m2/día]
     - eto   = Hargreaves-Samani, FAO-56 ec. 52 (ra convertida a mm/día: x 0.408) [mm/día]
               eto = factor * 0.0023 * (tmean + 17.8) * sqrt(tmax - tmin) * ra * 0.408
-    El factor de corrección sale de params['clima']['factor_eto'] (1.0 si no existe: sin corrección;
-    ver decisión abierta 3 del contrato).
+    El factor de corrección sale de params['clima']['factor_eto'].
     No modifica las columnas de entrada. Devuelve un DataFrame nuevo.
-    Los vacíos no se rellenan aquí: la limpieza de datos no es tarea de un módulo."""
+    """
     faltan = [c for c in COLS_REQUERIDAS if c not in df_in.columns]
     if faltan:
         raise KeyError(f"M1 requiere las columnas {faltan}")

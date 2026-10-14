@@ -1,4 +1,4 @@
-"""Pruebas del módulo 4 (biomasa por LUE y HI) con respuestas conocidas hechas a mano (guía, sección 8)."""
+"""Pruebas del módulo 4 (biomasa por LUE y HI) con respuestas conocidas hechas a mano (guía)."""
 from pathlib import Path
 
 import numpy as np

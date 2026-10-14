@@ -1,6 +1,6 @@
 """
-Carga de datos según docs/CONTRATO_DE_DATOS.md. TODOS los módulos reciben el DataFrame que
-devuelve cargar_entrada(); nadie debería leer los CSV por su cuenta.
+Carga de datos según docs/CONTRATO_DE_DATOS.md. Todos los módulos reciben el DataFrame que
+devuelve cargar_entrada().
 """
 from pathlib import Path
 

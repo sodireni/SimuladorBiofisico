@@ -1,4 +1,4 @@
-"""Pruebas del módulo 1 (clima) con respuestas conocidas (valores de referencia de la guía, sección 5)."""
+"""Pruebas del módulo 1 (clima) con respuestas conocidas (valores de referencia de la guía)."""
 from pathlib import Path
 
 import numpy as np

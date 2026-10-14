@@ -1,4 +1,4 @@
-"""Módulo 3: balance hídrico de un solo depósito. Ver docs/GUIA_DE_MODULOS.md (sección 7)."""
+"""Módulo 3: balance hídrico de un solo depósito."""
 import numpy as np
 import pandas as pd
 
@@ -71,7 +71,7 @@ def m3_balance_hidrico(df_in: pd.DataFrame, params: dict) -> pd.DataFrame:
         raise ValueError(f"sw_inicial_frac_awc debe estar en [0, 1], se recibió {frac0}")
 
     df = df_in.copy()
-    # posiciones (no etiquetas) para que funcione aunque el índice esté repetido o desordenado
+    # posiciones para que funcione aunque el índice esté repetido o desordenado
     pos = np.lexsort((df["fecha"].to_numpy(), df["ID_POLIGON"].to_numpy()))
     trabajo = df.iloc[pos]
     sw = np.full(len(df), np.nan)
