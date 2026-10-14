@@ -5,11 +5,6 @@ Fuente: Open-Meteo Historical Weather API (reanálisis ERA5 / ERA5-Land).
 Cada parcela se consulta con sus coordenadas EXACTAS, porque Open-Meteo ajusta
 la temperatura por la altitud del punto y eso conserva la variación entre parcelas.
 
-Cita sugerida (docs/FUENTES.md):
-  - Zippenfenig, P. (2023). Open-Meteo.com Weather API. Zenodo (CC BY 4.0).
-  - Hersbach, H. et al. (2020). The ERA5 global reanalysis. QJRMS, 146.
-  - Muñoz-Sabater, J. et al. (2021). ERA5-Land. Earth Syst. Sci. Data, 13.
-
 Uso (desde la carpeta principal del proyecto):
     python src/ingest/descargar_clima_diario_2025.py
 
@@ -36,7 +31,7 @@ VARIABLES = [
     "temperature_2m_min",
     "precipitation_sum",
     "shortwave_radiation_sum",        # MJ/m2/día
-    "et0_fao_evapotranspiration",     # solo para comparar con tu ETo Hargreaves
+    "et0_fao_evapotranspiration",     # solo para comparar con ETo Hargreaves
 ]
 
 

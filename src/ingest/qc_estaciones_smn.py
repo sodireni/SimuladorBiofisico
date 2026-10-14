@@ -2,8 +2,7 @@
 Compara Open-Meteo y CHIRTS-ERA5 (2025) contra las normales climatológicas del SMN en el punto
 exacto de tres estaciones de Tlaxcala.
 
-Datos de estación: SMN-CONAGUA, Normales Climatológicas (capturados a mano de las fichas por el
-equipo). Temperaturas máxima y mínima NORMALES de abril a noviembre (°C).
+Datos de estación: SMN-CONAGUA, Normales Climatológicas (capturados a mano de las fichas). Temperaturas máxima y mínima NORMALES de abril a noviembre (°C).
   - Zoquiapan (29034) y Tocatlán (29027): confirmar el periodo de la normal en la ficha (se
     asume 1991-2020).
   - Hueyotlipan (29010): normal 1971-2000 (más antigua; probablemente más fría).

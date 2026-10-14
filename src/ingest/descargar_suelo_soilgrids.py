@@ -1,19 +1,12 @@
 """
 Descarga capas de SoilGrids 2.0 (ISRIC) por WCS, en el rectángulo que cubre todas las parcelas.
 
-Por qué WCS: la API REST de SoilGrids está pausada por ISRIC (sin fecha de regreso) y además es
-beta y limitada a 5 llamadas/min. WCS es la ruta que ISRIC recomienda para obtener recortes.
-
 Descarga, para 4 profundidades (0-5, 5-15, 15-30, 30-60 cm), la predicción media ("mean") de:
   clay, sand, silt  (g/kg)      -> dividir entre 10 para obtener %
   bdod              (cg/cm3)    -> dividir entre 100 para obtener g/cm3
   soc               (dg/kg)     -> dividir entre 10 para obtener g/kg
   cfvo              (cm3/dm3)   -> fragmentos gruesos; dividir entre 10 para obtener %
 (Verifica las unidades en la metadata de cada capa antes de convertir.)
-
-Cita (docs/FUENTES.md): Poggio, L. et al. (2021). SoilGrids 2.0: producing soil information for the
-globe with quantified spatial uncertainty. SOIL, 7, 217-240. https://doi.org/10.5194/soil-7-217-2021
-Licencia de los datos: CC BY 4.0. Servicio WCS: https://maps.isric.org
 
 Uso (desde la carpeta principal del proyecto):
     python src/ingest/descargar_suelo_soilgrids.py
@@ -71,7 +64,7 @@ def descargar(prop, prof, bbox, ruta):
         print(f"   respuesta inesperada (código {r.status_code}); inicio del contenido:")
         print("   ", r.content[:300].decode("utf-8", errors="replace").replace("\n", " "))
         if r.status_code in (400, 404):
-            return False            # petición inválida: reintentar no ayuda
+            return False           
         espera = 15 * (i + 1)
         print(f"   reintento {i + 1}/{REINTENTOS} en {espera}s")
         time.sleep(espera)
@@ -96,7 +89,7 @@ def main():
             print(f"[{k}/{total}] {prop} {prof}")
             if not descargar(prop, prof, bbox, ruta):
                 fallidas.append(f"{prop}_{prof}")
-            time.sleep(2)           # cortesía con el servidor
+            time.sleep(2)          
 
     print("\nDescargadas:", total - len(fallidas), "de", total)
     if fallidas:

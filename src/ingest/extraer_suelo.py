@@ -15,10 +15,6 @@ Pasos:
   4. Lámina de agua en mm = fracción * espesor de la capa * (1 - grava). Las 4 capas suman 600 mm.
      La grava no retiene agua; se guarda también AWC_mm_sin_grava para sensibilidad.
 
-Cita: Saxton, K. E. y Rawls, W. J. (2006). Soil water characteristic estimates by texture and
-organic matter for hydrologic solutions. Soil Sci. Soc. Am. J., 70, 1569-1578.
-(Verifiquen los coeficientes contra el artículo antes de entregar.)
-
 Uso (desde la carpeta principal del proyecto):
     python src/ingest/extraer_suelo.py
 Salida: data/processed/suelo_parcelas.csv

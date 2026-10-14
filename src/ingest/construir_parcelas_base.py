@@ -2,7 +2,6 @@
 Arma data/processed/parcelas_base.csv: UNA fila por parcela con todo lo estático que necesita el
 simulador (ubicación, topografía, fecha de siembra y suelo). Es la entrada de los 4 módulos.
 
-NO incluye rendimiento (evita fuga de datos): el equipo de ML lo une por su cuenta.
 Las series diarias (clima y satélite) se quedan en sus propios archivos; ver docs/CONTRATO_DE_DATOS.md.
 
 Siembra de las parcelas con doble ciclo: se guardan los dos escenarios (A = primer ciclo,

@@ -4,7 +4,7 @@ Convierte el NDVI diario de Planet en un fPAR diario, calibrado contra el FAPAR 
 Motivo: Sentinel-2 tiene un hueco de ~4 semanas en junio-julio (nubosidad), justo cuando
 arranca el cultivo. Planet tiene muchas más observaciones, pero es NDVI, no FAPAR.
 
-Método (no usa rendimiento, por lo que no hay fuga de datos):
+Método:
   1. Parear, por parcela y fecha, cada observación válida de FAPAR (Sentinel-2) con el NDVI
      suavizado de Planet de ese mismo día.
   2. Ajuste lineal robusto  FAPAR = a * NDVI + b  (se descartan iterativamente los puntos

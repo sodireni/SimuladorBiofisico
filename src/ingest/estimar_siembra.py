@@ -1,17 +1,16 @@
 """
 Estima la fecha de siembra de cada parcela a partir del NDVI diario de Planet.
 
-NO hay fechas reales de siembra, así que se infiere (SUPUESTO del equipo, documentarlo):
+NO hay fechas reales de siembra, así que se infiere (SUPUESTO del equipo):
   0. Doble ciclo: si antes del pico principal hay otro pico que luego cae hasta la mitad hacia la
-     base (corte, chapeo, barbecho o resiembra), la parcela se marca "doble_ciclo". La fecha
-     principal es la del ciclo del pico más alto (escenario B: es el que probablemente se
-     cosechó); la del primer ciclo se guarda aparte (escenario A) para medir su efecto.
+     base (corte, chapeo, barbecho o resiembra), la parcela se marca "doble_ciclo". 
   1. Pico del ciclo: fecha del NDVI suavizado máximo. Base: NDVI mínimo antes del pico.
   2. Inicio de crecimiento (SOS): se camina hacia atrás desde el pico hasta el último día con
      NDVI <= base + pct_amplitud * (pico - base). Así un pico previo (p. ej. maleza) que vuelve
      a bajar antes del crecimiento real no se confunde con el arranque del cultivo.
   3. Siembra: desde el SOS se retrocede acumulando grados-día (Tbase de params.yaml) hasta
      sumar gdd_siembra_a_sos (cubre emergencia y cierre del dosel).
+
 Autoverificación sin usar rendimiento: los GDD entre siembra y pico deberían ser del orden de la
 antesis de cebada (~800-1000 °C·d). Además se repite con umbrales de 10 % y 30 % para medir cuánto
 se mueve la fecha (análisis de sensibilidad).

@@ -1,6 +1,4 @@
 """
-¿Captura cada fuente de temperatura la altitud de las parcelas?
-
 Para cada mes y variable (Tmax, Tmin), ajusta una recta  temperatura = a + b * elevación  entre las
 197 parcelas, para Open-Meteo y para CHIRTS-ERA5. El gradiente físico esperado en montaña es
 aproximadamente -5 a -7 °C por km (más frío al subir). Una fuente cuyo gradiente sea ~0 o positivo
