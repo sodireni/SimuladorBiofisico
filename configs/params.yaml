@@ -48,6 +48,7 @@ lue:
   hi_kemanian:                  # [P] opción B (recomendada): HI = hi0 + s * fG, fG = biomasa posterior a la antesis / biomasa total
     hi0: 0.3             # [P] Kemanian et al. (2007): para cebada, hi0 ≈ 0.3.
   s: 0.3               # [P] Kemanian et al. (2007): para cebada, s ≈ 0.3.
+  
 # SUPUESTOS PROPIOS del equipo (no hay fechas reales de siembra): se documentan y someten a análisis de sensibilidad.
 siembra:
   pct_amplitud: 0.20            # [V] umbral relativo del inicio de temporada (Jönsson y Eklundh 2004; en otros trabajos 20-30 %)

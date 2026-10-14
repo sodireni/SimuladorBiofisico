@@ -27,8 +27,6 @@ Script: `src/ingest/descargar_clima_diario_2025.py`
 - Poggio, L. et al. (2021). SoilGrids 2.0: producing soil information for the globe with quantified spatial uncertainty. SOIL, 7, 217-240. https://doi.org/10.5194/soil-7-217-2021
 - Saxton, K. E. y Rawls, W. J. (2006). Soil water characteristic estimates by texture and organic matter for hydrologic solutions. Soil Science Society of America Journal, 70, 1569-1578.
 - Servicio Meteorológico Nacional (SMN-CONAGUA). Normales climatológicas, estaciones Zoquiapan (29034), Tocatlán (29027) y Hueyotlipan (29010), Tlaxcala. https://smn.conagua.gob.mx
-- Goyne, P. J. et al. (1993). Radiation interception, radiation use efficiency and growth of barley cultivars. Australian Journal of Agricultural Research.
-- Kemanian, A. R., Stöckle, C. O., Huggins, D. R. y Viega, L. M. (2007). A simple method to estimate harvest index in grain crops. Field Crops Research, 103, 208-216.
 - Monteith, J. L. (1977). *Climate and the efficiency of crop production in Britain*. Philosophical Transactions of the Royal Society B, 281(980), 277–294. https://doi.org/10.1098/rstb.1977.0140  
   Base conceptual del modelo de eficiencia de uso de la radiación: la biomasa se relaciona con la radiación interceptada y la eficiencia de conversión.
 - Goyne, P. J., Milroy, S. P., Lilley, J. M., & Hare, J. M. (1993). *Radiation interception, radiation use efficiency and growth of barley cultivars*. Australian Journal of Agricultural Research, 44(6), 1351–1366. https://doi.org/10.1071/AR9931351  
