@@ -113,3 +113,20 @@ Solo se listan los escenarios y variables que superan el criterio de lectura. La
 | lue.hi_sens_llenado | 0.3 |
 
 Detalle de todas las variables y escenarios: `data/processed/sensibilidad_resumen.csv`.
+
+## Conclusiones
+
+Se probaron 15 escenarios, uno a la vez, sobre las 197 parcelas. Ninguno se evaluó con rendimiento. Los resultados no llevaron a cambiar ningún parámetro del caso base.
+
+**Supuestos que cambian el orden entre parcelas.**
+- Fecha de siembra: con siembra fija el 5-may, la biomasa cambia -34 % (ρ 0.64) y GDD_antesis +31 % (ρ 0.86). Es el supuesto más influyente, y no se conocen fechas reales de siembra.
+- Doble ciclo: el escenario B altera el orden en las 31 parcelas afectadas (ρ de GDD_antesis 0.49) y deja 6 ciclos sin madurez antes del 30-nov.
+- Modo de fenología: el modo satelital produce una fenología muy distinta (ρ de ETa_acum 0.25, de biomasa 0.32, de DAP_antesis_est -0.12).
+- Índice de cosecha: la opción de Kemanian et al. (2007) casi no se relaciona con la opción base (ρ 0.19). En el caso base HI_penalizado vale 0.45 en 149 de 197 parcelas, por lo que aporta poca variación.
+- Definición de GDD_antesis: con la antesis por umbral (definición de la guía) el orden cambia por completo (ρ -0.11).
+
+**Supuestos que solo cambian la magnitud (ρ ≥ 0.95).** RUE (1.2 g/MJ: biomasa -52 %, ρ 1.00), Tbase 2 °C (biomasa +21 %, ETa +15 %; refleja que los umbrales de 800 y 1,450 °C·d no se recalibraron) y factor de ETo 1.09 (ETa +8.8 %, biomasa -0.1 %).
+
+**Supuestos sin efecto apreciable.** Agua inicial (0.3 y 0.8 de AWC), AWC con o sin grava, y hi_beta de la opción A.
+
+**Implicaciones.** Biomasa_Total_Sim es útil para ordenar parcelas, no como valor absoluto. Las variables de fenología (GDD, DAP) dependen de la fecha de siembra estimada. HI_penalizado tiene poca variación.
