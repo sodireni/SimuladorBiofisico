@@ -42,15 +42,15 @@ Esta sección empieza con un resumen de los supuestos que más pesan en los resu
 
 | # | Supuesto | Valor usado | Sensibilidad |
 |---|---|---|---|
-| 1 | Fecha de siembra | Estimada con NDVI de Planet; mediana 1-jun (p10 19-may, p90 22-jul) | Umbral de NDVI de 10 % y 30 %: hecha (−7 y +6 días). Siembra fija al 5-may: pendiente |
-| 2 | Doble ciclo (31 parcelas) | Escenario A (siembra del primer ciclo, mediana 25-may) | Escenario A contra B (mediana 26-jul): pendiente |
+| 1 | Fecha de siembra | Estimada con NDVI de Planet; mediana 1-jun (p10 19-may, p90 22-jul) | Umbral de NDVI de 10 % y 30 %: hecha (−7 y +6 días). Siembra fija al 5-may: Umbral de NDVI de 10 % y 30 %: −7 y +6 días. Siembra fija al 5-may: biomasa −34 % (ρ 0.64), GDD_antesis +31 %. Influyente. |
+| 2 | Doble ciclo (31 parcelas) | Escenario A (siembra del primer ciclo, mediana 25-may) | Escenario A contra B (mediana 26-jul): Escenario B: cambia el orden en las 31 parcelas (ρ de GDD_antesis 0.49) y deja 6 ciclos sin madurez. Influyente. |
 | 3 | Temperatura | Open-Meteo; CHIRTS no se usa | No aplica |
-| 4 | ETo | Hargreaves-Samani sin corrección (factor 1.0) | Factor 1.09: pendiente |
-| 5 | Fenología | Antesis a 800 °C·d y madurez a 1,450 °C·d, Tbase 0 °C | Tbase 2 °C y modo satelital: pendiente |
-| 6 | GDD_antesis y GDD_llenado | Calculados con el pico de NDVI y la caída del fPAR | Definición de la guía (con la antesis por umbral): pendiente |
-| 7 | Balance hídrico | Un depósito de 0-60 cm, p = 0.55, agua inicial = PWP + 0.5·AWC | Agua inicial 0.3, 0.5 y 0.8, y AWC con y sin grava: pendiente |
-| 8 | Eficiencia de uso de la luz (RUE) | 2.5 g/MJ de PAR absorbida | RUE 1.2 y 2.6: pendiente |
-| 9 | Índice de cosecha (HI) | HI base 0.45 con penalización por estrés (sensibilidades 0.5 y 0.3, sin fuente) | Alternativa de Kemanian et al. (2007): pendiente |
+| 4 | ETo | Hargreaves-Samani sin corrección (factor 1.0) | Factor 1.09: Factor 1.09: ETa +8.8 %, biomasa −0.1 %. Solo escala. |
+| 5 | Fenología | Antesis a 800 °C·d y madurez a 1,450 °C·d, Tbase 0 °C | Tbase 2 °C y modo satelital: Tbase 2 °C: solo escala (biomasa +21 %, ρ 0.98). Modo satelital: orden muy distinto (ρ 0.25 a 0.32). Influyente. |
+| 6 | GDD_antesis y GDD_llenado | Calculados con el pico de NDVI y la caída del fPAR | Definición de la guía (con la antesis por umbral): Antesis por umbral: ρ −0.11. Versión descartada: 61 parcelas con GDD_llenado = 0. |
+| 7 | Balance hídrico | Un depósito de 0-60 cm, p = 0.55, agua inicial = PWP + 0.5·AWC | Agua inicial 0.3, 0.5 y 0.8, y AWC con y sin grava: Sin efecto: agua inicial y grava cambian ETa 0.0 % (ρ ≥ 0.98). |
+| 8 | Eficiencia de uso de la luz (RUE) | 2.5 g/MJ de PAR absorbida | RUE 1.2 y 2.6: RUE 1.2: biomasa −52 % con ρ 1.00; RUE 2.6: +4 %. Solo escala. |
+| 9 | Índice de cosecha (HI) | HI base 0.45 con penalización por estrés (sensibilidades 0.5 y 0.3, sin fuente) | Alternativa de Kemanian et al. (2007): Kemanian: ρ 0.19 contra la opción base. Influyente. |
 | 10 | Procesos omitidos | Sin escurrimiento, riego ni ascenso capilar | No aplica (limitación) |
 
 ### 1. Alcance y respuestas de FIRA
