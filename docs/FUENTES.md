@@ -50,7 +50,7 @@ Esta sección empieza con un resumen de los supuestos que más pesan en los resu
 | 6 | GDD_antesis y GDD_llenado | Calculados con el pico de NDVI y la caída del fPAR | Definición de la guía (con la antesis por umbral): Antesis por umbral: ρ −0.11. Versión descartada: 61 parcelas con GDD_llenado = 0. |
 | 7 | Balance hídrico | Un depósito de 0-60 cm, p = 0.55, agua inicial = PWP + 0.5·AWC | Agua inicial 0.3, 0.5 y 0.8, y AWC con y sin grava: Sin efecto: agua inicial y grava cambian ETa 0.0 % (ρ ≥ 0.98). |
 | 8 | Eficiencia de uso de la luz (RUE) | 2.5 g/MJ de PAR absorbida | RUE 1.2 y 2.6: RUE 1.2: biomasa −52 % con ρ 1.00; RUE 2.6: +4 %. Solo escala. |
-| 9 | Índice de cosecha (HI) | HI base 0.45 con penalización por estrés (sensibilidades 0.5 y 0.3, sin fuente) | Alternativa de Kemanian et al. (2007): Kemanian: ρ 0.19 contra la opción base. Influyente. |
+| 9 | Índice de cosecha (HI) | HI base 0.45 con penalización por estrés (sensibilidades 0.5 y 0.3) | Alternativa de Kemanian et al. (2007): Kemanian: ρ 0.19 contra la opción base. Influyente. |
 | 10 | Procesos omitidos | Sin escurrimiento, riego ni ascenso capilar | No aplica (limitación) |
 
 ### 1. Alcance y respuestas de FIRA
@@ -152,7 +152,7 @@ Esta sección empieza con un resumen de los supuestos que más pesan en los resu
 - **Biomasa.** dBIO = PAR × fPAR × RUE × Ks × 10 (kg/ha/día), acumulada de la siembra a la madurez, con fPAR = `fapar_final` acotado a 1.
 - **RUE.** 2.5 g/MJ de PAR absorbida (la literatura de cebada reporta 2.6-2.9; Goyne et al., 1993). Es una constante de escala: no cambia el orden entre parcelas, pero la biomasa absoluta no debe leerse como biomasa medida.
 - **Índice de cosecha.** HI = 0.45 × (1 − 0.5 × (1 − KS_antesis) − 0.3 × (1 − KS_llenado)), acotado entre 0 y 0.45.
-  - Los valores 0.45, 0.5 y 0.3 son supuestos del equipo sin fuente.
+  - Los valores 0.45, 0.5 y 0.3 son supuestos del equipo.
   - La alternativa con respaldo bibliográfico es Kemanian et al. (2007), que se corre como sensibilidad.
 
 ### 5. Variables derivadas
